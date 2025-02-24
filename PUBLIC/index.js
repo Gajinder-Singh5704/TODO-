@@ -1,5 +1,4 @@
-// import data from "./getData.js";
-// let tasks = data;
+
 let url = 'http://localhost:3000/tasks';
 
 const getData = async (url) => {
@@ -43,20 +42,6 @@ let tasks = await getData(url)
     });
 // });
 
-
-
-// CALL THE FUNCTIONS AFTER THE DOM IS LOADED
-// document.addEventListener("DOMContentLoaded",()=>{
-//     // getTasks();
-//     // getTasks();
-//     console.log('sfvnh')
-//     showTasks(tasks);
-//     // archiveTask();
-//     // completetask()
-//     // addForm();
-//     // updateForm();
-//     // deleteTask();
-// })
 
 
 
@@ -212,21 +197,32 @@ const sendReq = async (url) => {
         document.querySelector(".main").addEventListener("click", (event) => {
             if (event.target.closest(".mark-archive-btn")) { 
                 let taskDiv = event.target.closest(".task");
-                if (taskDiv && confirm("Are you sure you want to archive this task?")) {
-                    let taskId = parseInt(taskDiv.dataset.id); 
-    
+                let archive = taskDiv.dataset.archive;
+                let taskId = parseInt(taskDiv.dataset.id); 
+                if(archive=="1"){
+                    if(confirm("Are you sure you want to unarchive this task?")){
+                        // let taskId = parseInt(taskDiv.dataset.id);   
+                        let task = tasks.find(t => t.id === taskId);
+                        if (task) {
+                            task.archived = 0;
+                            console.log("task id: ",task.id); 
+                            showTasks(tasks,1);
+                        }    
+                    }
+                }
+                else if (confirm("Are you sure you want to archive this task?")) {
+                    // let taskId = parseInt(taskDiv.dataset.id);    
                     let task = tasks.find(t => t.id === taskId);
                     if (task) {
                         task.archived = 1;
                         console.log("task id: ",task.id); 
-                        sendData({},`http://localhost:3000/updateArchive/${task.id}`,"PATCH")
+                        showTasks(tasks, 0); 
                     }
-                    showTasks(tasks, 0); 
                 }
+                sendData({},`http://localhost:3000/updateArchive/${taskId}`,"PATCH")
             }
         });
     };
-    // archiveTask()
 
     /*********************************Complete TASK*********************************/
     
@@ -234,20 +230,40 @@ const sendReq = async (url) => {
         document.querySelector(".main").addEventListener("click", (event) => {
             if (event.target.closest(".mark-complete-btn")) { 
                 let taskDiv = event.target.closest(".task");
-                if (taskDiv && confirm("MARK THE TASK AS COMPLETE?")) {
-                    let taskId = parseInt(taskDiv.dataset.id); 
-    
-                    let task = tasks.find(t => t.id === taskId);
-                    if (task) {
-                        task.status = 1;
-                        console.log("task id: ",task.id);
-                        sendData({},`http://localhost:3000/updateStatus/${task.id}`,"PATCH")
+                const status = taskDiv.dataset.status;
+                let taskId = parseInt(taskDiv.dataset.id); 
+                        console.log(taskId);
+                if(status == "1"){
+                    if(confirm('Mark task as Todo?')){
+                        // let taskId = parseInt(taskDiv.dataset.id); 
+                        // console.log(taskId);
+
+                        let task = tasks.find(t => t.id === taskId);
+                        if (task) {
+                            task.status = 0;
+                            console.log("task id: ",task.id);
+                            showTasks(tasks, 0); 
+                        }
                     }
-                    showTasks(tasks, 0); 
                 }
+                else{
+                    if(confirm('Mark task as Complete?')){
+                        // let taskId = parseInt(taskDiv.dataset.id); 
+                        // console.log(taskId);
+
+                        let task = tasks.find(t => t.id === taskId);
+                        if (task) {
+                            task.status = 1;
+                            console.log("task id: ",task.id);
+                            showTasks(tasks, 0); 
+                        }
+                    }
+                }
+                sendData({},`http://localhost:3000/updateStatus/${taskId}`,"PATCH")
+
             }
         });   
-        // completetask();
+
     };
 
 
@@ -371,9 +387,6 @@ addForm();
 
 //CONVERT TO FORM FOR UPDATE
 const updateForm = () =>{
-    // document.querySelectorAll(".edit-btn").forEach(button=>{
-    //     button.addEventListener("click", (event) => {
-    //         let taskDiv = event.target.closest(".task");
 
     document.querySelector(".main").addEventListener("click", (event) => {
         if (event.target.closest(".edit-btn")) {
@@ -391,7 +404,8 @@ const updateForm = () =>{
 
             form.dataset.id = taskDiv.dataset.id;
             form.dataset.archive = parseInt(taskDiv.dataset.archive);
-            form.dataset.stat = taskDiv.querySelector('.status').innerText;
+            form.dataset.stat = taskDiv.dataset.status;
+            // console.log('FROM FORM : ',form.dataset.stat)
             form.innerHTML = `
                         <header>
                             <select name="label" id="label" class="label">
@@ -417,6 +431,7 @@ const updateForm = () =>{
                 form.querySelector(".save-btn").addEventListener("click", (e) => {
                     e.preventDefault();
                     saveTask(form);
+                    // archiveTask();
                 });
  } });    
 }
@@ -427,17 +442,20 @@ function saveTask(form) {
     let description = form.querySelector(".description").value;
     let dueDate = form.querySelector(".due-date").value;
     let stat = form.dataset.stat;
-    let status;
-    (stat=='Todo')? status=0 : status=1;
+    console.log('stat is',stat)
+    let status = stat === "1" ? "Completed" : "Todo";
+ 
     // let status = form.querySelector(".status").value;
 
     // Create a new task div
     let taskDiv = document.createElement("div");
+    taskDiv.dataset.id = form.dataset.id;
+    taskDiv.dataset.status = form.dataset.stat;
+    taskDiv.dataset.archive = form.dataset.archive;
     taskDiv.classList.add("task");
-   
     taskDiv.innerHTML = `
         <header>
-            <span class="status">${stat}</span>
+            <span class="status">${status}</span>
             <span class="label">${label}</span>
             <h1 class="task-title">${title}</h1>
         </header>
@@ -447,40 +465,40 @@ function saveTask(form) {
         <footer>
             <span class="due-date">${dueDate}</span>
             <span class="buttons">
-                <button class="complete-btn"><i class='bx bx-check-double'></i></button>
+                <button class="mark-complete-btn"><i class='bx bx-check-double'></i></button>
                 <button class="delete-btn"><i class='bx bx-trash' ></i></button>
-                <button class="archive-btn"><i class='bx bx-hide'></i></button>
+                <button class="mark-archive-btn"><i class='bx bx-hide'></i></button>
                 <button class="edit-btn"><i class='bx bx-edit' ></i></button>
             </span>
         </footer>
     `;
     let archive = form.dataset.archive;
+    status = parseInt(status);
     //send data to server
     let data = {
         label: label,
         title: title,
         description: description,
         dueDate: dueDate,
-        status: status,
+        status: stat,
         archive: parseInt(archive)
     }
+    console.log('type of status is',typeof(stat))
     console.log(data);
     let id = form.dataset.id;
     sendData(data,`http://localhost:3000/update/${id}`,"PUT");
 
+    if(stat==1){
+        taskDiv.style.backgroundColor='#d6ffb5';
+    }
     // Replace form with the updated task div
     form.replaceWith(taskDiv);
 
-    // Reattach event listeners for edit buttons
-    const todo_btn=document.querySelector('#todo-btn');
-    todo_btn.addEventListener('click',()=>showStatus(0));
-    
-    const completed_btn=document.querySelector('#completed-btn');
-    completed_btn.addEventListener('click',()=>showStatus(1));
     updateForm();
-    // archiveTask();
   
 }
+
+
 
 /*********************************DELETE TASK*********************************/
 
@@ -502,7 +520,6 @@ showTasks(tasks);
     archiveTask();
     completetask()
     addForm();
-    // updateForm();
     deleteTask();
 
 
