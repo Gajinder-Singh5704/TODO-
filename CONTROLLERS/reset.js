@@ -2,7 +2,7 @@ import { connection } from "../DATABASE/sqlconnect.js";
 import bcrypt from "bcrypt";
 import dotenv from 'dotenv';
 import jwt from "jsonwebtoken"
-
+import { sendMail } from "./sendMail.js";
 
 dotenv.config();
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -33,6 +33,7 @@ export const changePass = (req,res) =>{
             const token = jwt.sign({ email: email }, secret, { expiresIn: "15m" });
             const link = `http://localhost:3000/${email}/${token}`;
             console.log(link);
+            sendMail(email,link)
             res.send('RESET LINK HAS BEEN SENT TO THE USER EMAIL');
         }
     conn.end();
@@ -87,7 +88,7 @@ export const  postChangePass = (req,res) =>{
                 if (err) throw err;
                 console.log(result);
             })
-            res.redirect('/')
+            res.clearCookie("reset").redirect('/');
         }
     })
 }
