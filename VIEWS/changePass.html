@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="signUp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="signup-form">
+            <h2 class="form-title">CHANGE PASSWORD</h2>
+            <form action="/postChangePass" method="post">
+    
+                <span class="alert password-alert"></span>
+
+                <div class="form-fields">
+                    <label for="password"><i class="fa fa-key" aria-hidden="true"></i></label>
+                    <input type="password" name="password" id="password" placeholder="New Password" >
+                    <i class="fa fa-eye" id="togglePassword"></i> 
+                </div>
+
+                <span class="alert cnfrm-pass-alert"></span>
+
+                <div class="form-fields">
+                    <label for="confirm-password"><i class="fa fa-key" aria-hidden="true"></i></label>
+                    <input type="password" name="confirm-password" id="confirm-password" placeholder="Repeat your password" required>
+                    <i class="fa fa-eye" id="toggleConfirmPassword"></i> 
+                </div>
+    
+                <div class="form-fields register" >
+                    <input type="submit" id="register-btn" value="SUBMIT" name="register">        
+                </div>
+            </form>
+        </div>
+        <div class="image">
+            <figure>
+                <img src="image.png" alt="image">
+            </figure>
+            <!-- <p class="link">Already a user? <a href="/">Login</a></p> -->
+        </div>
+    </div>
+    <script src="signUp.js"></script>
+</body>
+</html>

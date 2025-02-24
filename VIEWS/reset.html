@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="signUp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="signup-form">
+            <h2 class="form-title">Reset Password</h2>
+            <form action="/changepass" method="post">
+
+                <span class="alert email-alert"></span>
+
+                <div class="form-fields">
+                    <label for="email" class="material-symbols-outlined"><i class="fa fa-envelope" aria-hidden="true"></i></label>
+                    <input type="email" name="email" id="email" placeholder="Your email" required>
+                </div>
+                <div class="form-fields register" >
+                    <input type="submit" id="register-btn" value="SEND LINK" name="register">        
+                </div>
+            </form>
+        </div>
+        <div class="image">
+            <figure>
+                <img src="image.png" alt="image">
+            </figure>
+            <p class="link">Already a user? <a href="/">Login</a></p>
+        </div>
+    </div>
+    <!-- <script src="signUp.js"></script> -->
+</body>
+</html>

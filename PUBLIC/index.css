@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Sigmar&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+*{
+    font-family: 'Poppins';
+}
+
+body{
+    margin: 0;
+    padding: 0%;
+}
+
+
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
+
+/* LEFT SIDE */
+.material-icons{
+    /* min-height: 32px; */
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid rgb(231, 233, 199);
+    width: 200px;
+    height: 100vh;
+    gap: 50px;
+    position: fixed;
+    padding: 10px;
+    z-index: 1;
+    background-color: white;
+    /* overflow: auto; */
+}
+.hidebar{
+    transition: 1s ease-in-out;
+    /* transform: translateX(-150%); */
+    display: none;
+}
+.user-info{
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+}
+.menu-bar{
+    display: flex;
+    position: relative;
+}
+#menu-btn ,#show-btn{
+    position: absolute;
+    right: 0;
+    background: transparent;
+    border: none;
+    font-size: 15px;
+    
+}
+.menu-hide{
+   position: absolute;
+   top: 30%;
+   left: 1%;
+   width: 80px;
+   border: 1px solid;
+   border-radius: 30px;
+   padding: 10px;
+}
+
+
+
+nav .status button,nav .labels button,nav .archives button,nav .logout button{
+    width: 200px;
+    background:transparent;
+    border: none;
+    background-color: #dcdfc2;
+    text-align:left;
+    font-size: medium;
+    margin: 5px 0;
+    border-radius: 10px;
+}
+.logout{
+    position: absolute;
+    bottom: 5%;
+}
+
+/* RIGHT SIDE*/
+.task-container{
+    display: flex;
+    flex-direction: column;
+}
+/* TOP */
+.head{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 2px solid; */
+    width: 99.7%;
+    height: 10vh;
+}
+
+.head input{
+    width: 50%;
+    height: 55px;
+    border-radius: 30px;
+    background-color: hsl(190, 10%, 88%);
+    border: none;
+    font-size: medium;
+}
+
+/* BOTTOM */
+.main{
+    /* border:3px solid; */
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap:20px;
+    height: 84vh;
+    justify-content: center;
+    overflow: scroll;
+
+}
+::-webkit-scrollbar {
+    display: none;
+}
+.task{
+    padding: 10px;
+    /* border: 2px solid; */
+    height: 300px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color:  #fff4a9;
+    /* background-color:  #d6ffb5; */
+    border-radius: 5px;
+
+}
+
+/* TASKS DIV */
+.task header{
+    display: flex;
+    flex-direction: column;
+}
+.label{
+    position: absolute;
+    text-align: right;
+    top: 2%;
+    right: 1%;
+}
+.task-title{
+    /* text-align: center; */
+   overflow: hidden;
+    text-decoration: underline;
+    margin: 0;
+    margin-bottom: 10px;
+    height: 50px;
+}
+
+.description{
+    height: 400px;
+}
+
+main{
+    height: 80%;
+    overflow: auto;
+}
+
+.due-date{
+    width: 100px;
+}
+
+textarea{
+    resize: none;
+}
+.task footer{
+    display: flex;
+    justify-content: space-between;
+}
+footer .buttons{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+   
+}
+.add-task{
+    display: flex;
+    justify-content: center;
+    background-color: #d7d7d7;
+}
+#add{
+    background: transparent;
+    border: none;
+    font-size: 200px;
+    color: rgb(91, 99, 96);
+}
+
+.buttons button,#cancel{
+    background: transparent;
+    border: none;
+    font-size: large;
+    /* background-color: none; */
+}
+.buttons button:hover{
+    scale: 1.2;
+}
+.task:hover{
+    transition: 400ms;
+    scale: 1.02;
+}
+
+
+
+
+
+
+
+
+
+
+

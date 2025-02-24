@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar hidebar ">
+            <span class="user-info">
+                GAJINDER SINGH
+            </span>
+            <span class="menu-bar">
+                <span>MENU</span>
+                <button id="menu-btn"><i class="fa-solid fa-bars"></i></button>
+            </span>
+            <span class="status">
+                <button id="all-tasks">ALL TASKS</button>
+            </span>
+            <span class="status">
+                <span id="labels-title">STATUS</span>
+                <button class="label-btn"  id="todo-btn"><i class='bx bx-time' >&nbsp</i>TODO</button>
+                <!-- <button class="label-btn">ONGOING</button> -->
+                <button class="label-btn" id="completed-btn"><i class='bx bx-check-double' >&nbsp</i>COMPLETED</button>
+            </span>
+            <span class="labels">
+                <span id="labels-title">LABELS</span>
+                <button class="label-btn" id="work-btn"><i class='bx bx-briefcase-alt'>&nbsp</i>WORK</button>
+                <button class="label-btn" id="personal-btn"><i class='bx bxs-user' >&nbsp</i>PERSONAL</button>
+                <button class="label-btn" id="others-btn"><i class='bx bx-world' >&nbsp</i>OTHERS</button>
+            </span>
+            <span class="archives">
+                <button class="label-btn" id="archive-btn"><i class='bx bx-hide' >&nbsp</i>ARCHIVES</button>
+            </span>
+            <span class="logout">
+                <button class="logout-btn">
+                    <i class='bx bx-exit' >&nbsp</i>
+                    LOGOUT
+                </button>
+            </span>
+        </nav>
+        <div class="task-container">
+            <header class="head">
+                <span class="menu-bar menu-hide">
+                    <span>MENU &nbsp</span>
+                    <button id="show-btn"><i class="fa-solid fa-bars"></i></button>
+                </span>
+                <input type="text" name="search" id="search" placeholder="SEARCH TASKS">
+            </header>
+            <main class="main">
+                <div class="task add-task"></div>
+
+                <div class="task">
+                    <header>
+                        <span class="label">Work</span>
+                        <h1 class="task-title">
+                            TASK TITLE
+                        </h1>
+                    </header>
+
+                    <main>
+                        <span class="description">
+                            DESCRIPTION
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas incidunt voluptate dolores enim exercitationem possimus repellendus, dolore iusto accusamus. Harum, soluta placeat quasi dolorum delectus facilis autem quos molestias perferendis?lorem
+                        </span>
+                    </main>
+                    <footer>
+                        <span class="due-date">2025-02-21</span>
+                        <span class="buttons">
+                            <button class="complete-btn"><i class='bx bx-check-double'></i></button>
+                            <button class="delete-btn"><i class='bx bx-trash' ></i></button>
+                            <button class="archive-btn"><i class='bx bx-hide'></i></button>
+                            <button class="edit-btn"><i class='bx bx-edit' ></i></i></button>
+                            
+                        </span>
+                    </footer>
+                </div>
+                <div class="task">
+                    <header>
+                        <span class="label">Work</span>
+                        <h1 class="task-title">
+                            TASK TITLE
+                        </h1>
+                        <!-- <span class="task-title">
+                            TASK TITLE
+                        </span> -->
+                    </header>
+
+                    <main>
+                        <span class="description">
+                            DESCRIPTION
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas incidunt voluptate dolores enim exercitationem possimus repellendus, dolore iusto accusamus. Harum, soluta placeat quasi dolorum delectus facilis autem quos molestias perferendis?lorem
+                        </span>
+                    </main>
+                    <footer>
+                        <span class="due-date">2025-02-21</span>
+                        <span class="buttons">
+                            <button class="complete-btn"><i class='bx bx-check-double'></i></button>
+                            <button class="delete-btn"><i class='bx bx-trash' ></i></button>
+                            <button class="archive-btn"><i class='bx bx-hide'></i></button>
+                            <button class="edit-btn"><i class='bx bx-edit' ></i></i></button>
+                            
+                        </span>
+                    </footer>
+                </div>
+                <div class="task">
+                    <header>
+                        <span class="label">Work</span>
+                        <h1 class="task-title">
+                            TASK TITLE
+                        </h1>
+                        <!-- <span class="task-title">
+                            TASK TITLE
+                        </span> -->
+                    </header>
+
+                    <main>
+                        <span class="description">
+                            DESCRIPTION
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas incidunt voluptate dolores enim exercitationem possimus repellendus, dolore iusto accusamus. Harum, soluta placeat quasi dolorum delectus facilis autem quos molestias perferendis?lorem
+                        </span>
+                    </main>
+                    <footer>
+                        <span class="due-date">2025-02-21</span>
+                        <span class="buttons">
+                            <button class="complete-btn"><i class='bx bx-check-double'></i></button>
+                            <button class="delete-btn"><i class='bx bx-trash' ></i></button>
+                            <button class="archive-btn"><i class='bx bx-hide'></i></button>
+                            <button class="edit-btn"><i class='bx bx-edit' ></i></i></button>
+                            
+                        </span>
+                    </footer>
+                </div>
+
+                <!-- <form class="task">
+                    <header>
+                        <select name="label" id="label" class="label">
+                            <option>WORK</option>
+                            <option>PERSONAL</option>
+                            <option>OTHER</option>
+                        </select>
+                        <input type="text" class="task-title">
+                    </header>
+                        <textarea name="description" id="description" class="description"></textarea>
+                    <footer>
+                        <input type="date" name="due-date" id="due-date" class="due-date">
+                        <span class="buttons">
+                            <button class="complete-btn"><i class='bx bx-check-double'></i></button>
+                        </span>
+                    </footer>
+                </form> -->
+
+
+                <!-- <div class="task">
+                    THIS IS A TASK
+                </div>
+                <div class="task">
+                    THIS IS A TASK
+                </div>
+                <div class="task">
+                    THIS IS A TASK
+                </div>
+                <div class="task">
+                    THIS IS A TASK
+                </div>
+                <div class="task">
+                    THIS IS A TASK
+                </div>
+                <div class="task">
+                    THIS IS A TASK
+                </div> -->
+
+            </main>
+        </div>
+    </div>
+
+    <script type="module" src="index.js"></script>
+</body>
+</html>

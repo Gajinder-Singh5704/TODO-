@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+
+        <div class="image">
+            <figure>
+                <img src="image.png" alt="image">
+            </figure>
+            <p class="link">New user? <a href="/signup">SignUp</a></p>
+        </div>
+
+        <div class="signup-form">
+            <h2 class="form-title">Login</h2>
+            <form action="/login" method="post">
+                <div class="form-fields">
+                    <label for="email" class="material-symbols-outlined"><i class="fa fa-envelope" aria-hidden="true"></i></label>
+                    <input type="email" name="email" id="email" placeholder="Your email" required>
+                </div>
+    
+                <div class="form-fields">
+                    <label for="password"><i class="fa fa-key" aria-hidden="true"></i></label>
+                    <input type="password" name="password" id="password" placeholder="Password" required>
+                    <i class="fa fa-eye" id="togglePassword"></i> 
+                </div>
+            
+                <p class="link">Forgot Password? <a href="/reset">Reset password</a></p>
+
+                <div class="form-fields register" >
+                    <input type="submit" id="register-btn" value="Login" name="register">        
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>
