@@ -16,3 +16,15 @@ export const getTasks = (req,res) =>{
         conn.end();    
 }
 
+export const userName = (req,res) =>{
+        let user_id = req.user_id;
+        const conn = connection();
+        const q = `SELECT name FROM users WHERE id = ?`;
+        conn.query(q,[user_id],(err,result)=>{
+            if(err) throw (err);
+             let content = result[0].name;
+             res.json(content);
+        })
+        conn.end();  
+} 
+

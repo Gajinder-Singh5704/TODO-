@@ -24,6 +24,7 @@ body{
 }
 
 .sidebar{
+    transition: 0.5s ease-in-out;
     display: flex;
     flex-direction: column;
     border-right: 2px solid rgb(231, 233, 199);
@@ -38,8 +39,8 @@ body{
 }
 .hidebar{
     transition: 1s ease-in-out;
-    /* transform: translateX(-150%); */
-    display: none;
+    transform: translateX(-150%);
+    /* display: none; */
 }
 .user-info{
     text-align: center;
@@ -136,6 +137,7 @@ nav .status button,nav .labels button,nav .archives button,nav .logout button{
     background-color:  #fff4a9;
     /* background-color:  #d6ffb5; */
     border-radius: 5px;
+    box-shadow: 10px 10px 10px hsl(190, 10%, 88%);
 
 }
 

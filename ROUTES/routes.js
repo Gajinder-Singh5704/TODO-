@@ -2,7 +2,7 @@ import express from "express";
 import { auth } from "../MIDDLEWARES/auth.js";
 import { getLogin, postLogin,check } from "../CONTROLLERS/login.js";
 import { getSignup,postSignup } from "../CONTROLLERS/signUp.js";
-import { goHome,getTasks } from "../CONTROLLERS/getTasks.js";
+import { goHome,getTasks,userName } from "../CONTROLLERS/getTasks.js";
 import { addTask } from "../CONTROLLERS/addTask.js";
 import { deleteTask } from "../CONTROLLERS/delete.js";
 import { updateTask } from "../CONTROLLERS/updateTask.js";
@@ -20,7 +20,8 @@ route.get('/signup', getSignup);                          //GET SIGNUP PAGE
 route.get('/reset', getReset);                          //GET RESET PAGE
 route.get('/:email/:token', getChangePass);                         
 route.get('/home',auth,goHome);
-route.get('/check',auth,check)
+route.get('/check',auth,check);
+route.get('/username',auth,userName);                          
 route.get('/tasks',auth,getTasks);                               //GET ALL TASKS
 route.get('/logout',auth,logout);                          
 

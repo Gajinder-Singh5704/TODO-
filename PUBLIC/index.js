@@ -542,3 +542,31 @@ showTasks(tasks);
     deleteTask();
 
 
+    const setUsername = async() =>{
+        const userName = async (url) => {
+            try {
+                let response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                });
+            
+                if (response.ok) {
+                    let result = await response.json();
+                    return result;
+                } else {
+                    console.error("Server error:", response.statusText);
+                }
+            } catch (error) {
+                console.error("Fetch error:", error);
+            }
+        };
+        
+        const uurl = `http://localhost:3000/username`
+        let user_name = await userName(uurl)
+        console.log(user_name);
+        
+        document.querySelector('.user-info').textContent = user_name.toUpperCase();
+    }
+    setUsername();
