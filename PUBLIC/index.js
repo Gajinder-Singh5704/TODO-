@@ -26,7 +26,6 @@ const getData = async (url) => {
 let tasks = await getData(url)
 
 //SIDE BAR EVENT LISTENERS 
-// document.addEventListener("DOMContentLoaded", () => {
     const sidebar = document.querySelector(".sidebar");
     const menuBtn = document.getElementById("menu-btn");
     const showBtn = document.getElementById("show-btn");
@@ -40,10 +39,6 @@ let tasks = await getData(url)
         sidebar.classList.remove("hidebar");
         document.querySelector('.menu-hide').style.display='none';
     });
-// });
-
-
-
 
 /*******************************SEND TO SERVER*******************************/
 

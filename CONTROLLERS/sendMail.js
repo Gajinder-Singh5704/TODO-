@@ -1,18 +1,22 @@
 import nodemailer from "nodemailer";
+import dotenv from 'dotenv';
+dotenv.config();
 
+let user = process.env.EMAIL;
+let pass = process.env.PASSWORD;
 export const sendMail = async(email,link) =>{
     const transporter = nodemailer.createTransport({
         service: "gmail",
         port: 465,
         secure: true,
         auth: {
-          user: "thakur.som1998@gmail.com",
-          pass: "fixgouztznvinscj",
+          user: user,
+          pass: pass,
         },
       });
     
       const receiver = {
-        from :  "thakur.som1998@gmail.com",
+        from : user,
         to : email ,
         subject : "TODO PASSWORD RESET",
         text : link
