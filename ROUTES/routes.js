@@ -19,7 +19,7 @@ route.get('/', getLogin);                                 //GET LOGIN PAGE
 route.get('/signup', getSignup);                          //GET SIGNUP PAGE
 route.get('/reset', getReset);                          //GET RESET PAGE
 route.get('/:email/:token', getChangePass);                         
-route.get('/home',goHome);
+route.get('/home',auth,goHome);
 route.get('/check',auth,check)
 route.get('/tasks',auth,getTasks);                               //GET ALL TASKS
 route.get('/logout',auth,logout);                          
