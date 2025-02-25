@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     return alert(data.message);
                 }
                 form.reset();
-                window.location.href='/'
+                window.location.replace('/')
             });          
         })
     }

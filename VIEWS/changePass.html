@@ -44,3 +44,16 @@
     <script src="signUp.js"></script>
 </body>
 </html>
+
+
+<script>
+    const submitForm = () =>{
+        const submitBtn = document.querySelector("#register-btn");
+        const form = document.querySelector('form');
+        submitBtn.addEventListener('click',()=>{ 
+            form.submit();
+            form.reset();
+        })
+    }
+    submitForm();
+</script>

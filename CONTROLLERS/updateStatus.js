@@ -14,7 +14,7 @@ export const updateStatus= (req,res)=>{
                 q = `UPDATE tasks SET status = ? WHERE user_id = ? AND id = ?`
                 con.query(q,[bool,user_id,id],(err,result)=>{
                     if(err) throw (err);
-                    console.log(result);
+                    console.log(result); 
                     res.send({
                         message : 'SUCCESS'
                     });

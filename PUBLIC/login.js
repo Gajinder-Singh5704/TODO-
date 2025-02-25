@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     return alert(data.message);
                 }
                 form.reset();
-                window.location.href='/home'
+                window.location.replace('/home')
             });          
         })
     }

@@ -10,7 +10,9 @@ export const deleteTask = (req,res) =>{
     con.query(q,[user_id,task_id],(err,result)=>{
         if(err) throw(err);
         console.log(result);
-        res.send('SUCCESS');
+        res.send({
+            message : 'SUCCESS'
+        });
     })
     con.end();
 }

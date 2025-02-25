@@ -20,7 +20,7 @@
                     <input type="email" name="email" id="email" placeholder="Your email" required>
                 </div>
                 <div class="form-fields register" >
-                    <input type="submit" id="register-btn" value="SEND LINK" name="register">        
+                    <input type="button" id="register-btn" value="SEND LINK" name="register">        
                 </div>
             </form>
         </div>
@@ -31,6 +31,31 @@
             <p class="link">Already a user? <a href="/">Login</a></p>
         </div>
     </div>
-    <!-- <script src="signUp.js"></script> -->
 </body>
 </html>
+
+<script>
+        const submitForm = () =>{
+        const submitBtn = document.querySelector("#register-btn");
+        submitBtn.addEventListener('click',()=>{
+            const form = document.querySelector('form');
+
+            const email = document.getElementById('email').value;
+            console.log(email)
+            fetch('/changepass', {
+                method: 'POST',
+                body: JSON.stringify({ email }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.success) {
+                    return alert(data.message);
+                }
+                form.reset();
+                alert(data.message);
+            });          
+        })
+    }
+    submitForm();
+</script>

@@ -142,6 +142,9 @@ const sendReq = async (url) => {
                 taskDiv.style.backgroundColor='#d6ffb5';
             }
             addForm();
+            // archiveTask();
+            // completetask();
+            // deleteTask();
             updateForm();
            
        });
@@ -207,7 +210,8 @@ const sendReq = async (url) => {
                             task.archived = 0;
                             console.log("task id: ",task.id); 
                             showTasks(tasks,1);
-                        }    
+                        }   
+                        sendData({},`http://localhost:3000/updateArchive/${taskId}`,"PATCH") 
                     }
                 }
                 else if (confirm("Are you sure you want to archive this task?")) {
@@ -218,8 +222,9 @@ const sendReq = async (url) => {
                         console.log("task id: ",task.id); 
                         showTasks(tasks, 0); 
                     }
+                    sendData({},`http://localhost:3000/updateArchive/${taskId}`,"PATCH")
                 }
-                sendData({},`http://localhost:3000/updateArchive/${taskId}`,"PATCH")
+                // sendData({},`http://localhost:3000/updateArchive/${taskId}`,"PATCH")
             }
         });
     };
@@ -244,6 +249,7 @@ const sendReq = async (url) => {
                             console.log("task id: ",task.id);
                             showTasks(tasks, 0); 
                         }
+                        sendData({},`http://localhost:3000/updateStatus/${taskId}`,"PATCH")
                     }
                 }
                 else{
@@ -257,9 +263,10 @@ const sendReq = async (url) => {
                             console.log("task id: ",task.id);
                             showTasks(tasks, 0); 
                         }
+                        sendData({},`http://localhost:3000/updateStatus/${taskId}`,"PATCH")
                     }
                 }
-                sendData({},`http://localhost:3000/updateStatus/${taskId}`,"PATCH")
+                // sendData({},`http://localhost:3000/updateStatus/${taskId}`,"PATCH")
 
             }
         });   
@@ -300,10 +307,12 @@ const addForm = () =>{
         cancelAdd();
 
         // Save with Button
-            form.addEventListener('submit',(e)=>{
+            form.addEventListener('submit',async(e)=>{
                 e.preventDefault()
                 appendTask(form);
-               
+                location.reload();
+                // let tasks = await getData(url)
+                // showTasks(tasks);
             })
     });
 
@@ -359,9 +368,9 @@ taskDiv.innerHTML = `
     <footer>
         <span class="due-date">${dueDate}</span>
         <span class="buttons">
-            <button class="complete-btn"><i class='bx bx-check-double'></i></button>
+            <button class="mark-complete-btn"><i class='bx bx-check-double'></i></button>
             <button class="delete-btn"><i class='bx bx-trash' ></i></button>
-            <button class="archive-btn"><i class='bx bx-hide'></i></button>
+            <button class="mark-archive-btn"><i class='bx bx-hide'></i></button>
             <button class="edit-btn"><i class='bx bx-edit' ></i></button>
         </span>
     </footer>
@@ -378,7 +387,6 @@ const main = document.querySelector('.main');
     if (main && addtask_div) {
         main.insertBefore(taskDiv, addtask_div.nextSibling);
     }
-
 updateForm();
 addForm();
 }
@@ -516,6 +524,17 @@ const deleteTask = () => {
 };
 
 
+
+//LOGOUT BTN 
+const logout = () =>{
+    const button = document.getElementById('logout');
+    button.addEventListener('click',()=>{
+        if(confirm('LOGOUT??')){
+            window.location.replace('/logout');
+        }
+    })
+}
+logout();
 showTasks(tasks);
     archiveTask();
     completetask()

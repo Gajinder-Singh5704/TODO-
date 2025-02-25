@@ -24,7 +24,11 @@ export const changePass = (req,res) =>{
         if (err) throw(err)
 
         if (result.length === 0) {
-            res.send("User not found");
+            res.json({ 
+                success: false,
+                message: 'USER NOT FOUND'
+            });
+            // res.send("User not found");
         } else {
 
             // res.send("User found");
@@ -33,8 +37,12 @@ export const changePass = (req,res) =>{
             const token = jwt.sign({ email: email }, secret, { expiresIn: "15m" });
             const link = `http://localhost:3000/${email}/${token}`;
             console.log(link);
-            sendMail(email,link)
-            res.send('RESET LINK HAS BEEN SENT TO THE USER EMAIL');
+            sendMail(email,link);
+            res.json({ 
+                success: true,
+                message: 'RESET LINK HAS BEEN SENT TO THE USER EMAIL'
+            });
+            // res.send('RESET LINK HAS BEEN SENT TO THE USER EMAIL');
         }
     conn.end();
     });

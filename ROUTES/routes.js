@@ -9,7 +9,7 @@ import { updateTask } from "../CONTROLLERS/updateTask.js";
 import { updateStatus } from "../CONTROLLERS/updateStatus.js";
 import { updateArchive } from "../CONTROLLERS/updateArchive.js";
 import { changePass, getReset, postChangePass,getChangePass } from "../CONTROLLERS/reset.js";
-
+import { logout } from "../CONTROLLERS/logout.js";
 
 const route = express.Router();
 
@@ -22,7 +22,7 @@ route.get('/:email/:token', getChangePass);
 route.get('/home',goHome);
 route.get('/check',auth,check)
 route.get('/tasks',auth,getTasks);                               //GET ALL TASKS
-
+route.get('/logout',auth,logout);                          
 
 // /****************************************************************************************POST REQUESTS****************************************************************************************/
 
