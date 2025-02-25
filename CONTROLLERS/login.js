@@ -1,5 +1,4 @@
 import { connection } from "../DATABASE/sqlconnect.js";
-import { auth } from "../MIDDLEWARES/auth.js";
 import bcrypt from "bcrypt";
 import dotenv from 'dotenv';
 import jwt from "jsonwebtoken"
@@ -24,7 +23,11 @@ export const postLogin = (req,res) =>{
         if (err) throw(err)
 
         if (result.length === 0) {
-            res.send("User not found");
+            res.json({ 
+                success: false,
+                message: "USER NOT FOUND"
+            });
+            // res.send("User not found");
         } else {
             let user = result[0];
             let passwordMatch = await bcrypt.compare(password, user.password_hash);
@@ -37,10 +40,18 @@ export const postLogin = (req,res) =>{
                         secure: true,   
                         maxAge: 24 * 60 * 60 * 1000
                     });
-                    return res.redirect('/home')
+                    res.json({ 
+                        success: true,
+                        message: "PASSWORD CORRECT"
+                    });
+                    // return res.redirect('/home')
                     // return res.json({ token });
             } else {
-                res.send("Incorrect password");
+                res.json({ 
+                    success: false,
+                    message: "PASSWORD NOT CORRECT"
+                });
+                // res.send("Incorrect password");
             }
         }
     conn.end();

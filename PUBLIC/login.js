@@ -15,7 +15,30 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
- 
-    // Apply function to both password fields
+
     togglePassword("password", "togglePassword");
+
+    const submitForm = () =>{
+        const submitBtn = document.querySelector("#register-btn");
+        submitBtn.addEventListener('click',()=>{
+            const form = document.querySelector('form');
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            console.log(email,password)
+            fetch('/login', {
+                method: 'POST',
+                body: JSON.stringify({ email, password }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.success) {
+                    return alert(data.message);
+                }
+                form.reset();
+                window.location.href='/home'
+            });          
+        })
+    }
+    submitForm();
 });

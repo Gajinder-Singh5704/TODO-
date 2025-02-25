@@ -12,14 +12,24 @@ export const postSignup = (req,res) =>{
     let query = `SELECT email FROM users WHERE email=?`;
     con.query(query,[email], async(err,result)=>{
         if (err) throw (err);
-        if(result.length>0) return res.send('USER ALREADY EXISTS');
+        if(result.length>0)
+            {
+                return  res.json({ 
+                    success: false,
+                    message: "USER ALREADY EXISTS"
+                });
+            } 
 
         let hashedPassword = await bcrypt.hash(password, 10);
         let query = `INSERT INTO users(name,email,password_hash) VALUES (?,?,?)`
         con.query(query,[name,email,hashedPassword],(err,result)=>{
             if (err) throw (err);
             console.log(result);
-            res.redirect('/');
+            res.json({ 
+                success: true,
+                message: "USER CREATED SUCCESSUFLLY"
+            });
+            // res.redirect('/');
             con.end();
         })
 
