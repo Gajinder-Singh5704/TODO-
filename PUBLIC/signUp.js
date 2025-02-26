@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     togglePassword("password", "togglePassword");
     togglePassword("confirm-password", "toggleConfirmPassword");
+
     const passStrength = () =>{
         //PASSWORD STRENGTH
         const pass = document.querySelector('#password');
@@ -66,6 +67,38 @@ document.addEventListener("DOMContentLoaded", function () {
     }       
     passStrength();
 
+
+    document.querySelector("#register-btn").disabled=true;
+
+    const submitForm = () =>{
+        const submitBtn = document.querySelector("#register-btn");
+        submitBtn.addEventListener('click',(event)=>{
+            event.preventDefault();
+            const form = document.querySelector('form');
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            console.log(email,password)
+            fetch('/signup', {
+                method: 'POST',
+                body: JSON.stringify({ name,email, password }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.success) {
+                    alert(data.message);
+                    location.reload();
+                    return;
+                }
+                form.reset();
+                window.location.replace('/')
+            });          
+        })
+    }
+    // submitForm();
+
+
     const matchPasswords = () =>{
         const pass = document.querySelector('#password');
         const cnfrm_pass = document.querySelector('#confirm-password');
@@ -92,6 +125,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     // let alert = document.querySelector('.cnfrm-pass-alert');
                     alert.style.display = 'none';
                     cnfrm_pass.style.borderBottom = '1px solid rgb(85, 82, 82)';
+                    document.querySelector("#register-btn").disabled=false;
+                    submitForm();
+
                 }
                 if(!cnfrm_pass.value){
                     // let alert = document.querySelector('.cnfrm-pass-alert');
@@ -101,31 +137,9 @@ document.addEventListener("DOMContentLoaded", function () {
             })
     }
     matchPasswords();
-    
-    const submitForm = () =>{
-        const submitBtn = document.querySelector("#register-btn");
-        submitBtn.addEventListener('click',()=>{
-            const form = document.querySelector('form');
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            console.log(email,password)
-            fetch('/signup', {
-                method: 'POST',
-                body: JSON.stringify({ name,email, password }),
-                headers: { 'Content-Type': 'application/json' }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (!data.success) {
-                    return alert(data.message);
-                }
-                form.reset();
-                window.location.replace('/')
-            });          
-        })
-    }
-    submitForm();
+    // submitForm();
+
+
 });
 
 
