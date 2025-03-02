@@ -22,7 +22,7 @@ export const postLogin = (req,res) =>{
 
         if (err) throw(err)
 
-        if (result.length === 0) {
+        if (result.length == 0) {
             res.json({ 
                 success: false,
                 message: "USER NOT FOUND"
@@ -42,7 +42,7 @@ export const postLogin = (req,res) =>{
                     });
                     res.json({ 
                         success: true,
-                        message: "PASSWORD CORRECT"
+                        message: "PASSWORD CORRECT",
                     });
                     // return res.redirect('/home')
                     // return res.json({ token });
