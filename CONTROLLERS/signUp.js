@@ -7,7 +7,7 @@ export const getSignup = (req,res) =>{
 }
 
 export const postSignup = (req,res) =>{
-    const {name,email,password} = req.body;
+    const {username,email,password} = req.body;
     const con = connection();
     let query = `SELECT email FROM users WHERE email=?`;
     con.query(query,[email], async(err,result)=>{
@@ -22,7 +22,7 @@ export const postSignup = (req,res) =>{
 
         let hashedPassword = await bcrypt.hash(password, 10);
         let query = `INSERT INTO users(name,email,password_hash) VALUES (?,?,?)`
-        con.query(query,[name,email,hashedPassword],(err,result)=>{
+        con.query(query,[username,email,hashedPassword],(err,result)=>{
             if (err) throw (err);
             console.log(result);
             res.json({ 

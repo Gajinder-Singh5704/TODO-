@@ -18,126 +18,146 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     togglePassword("password", "togglePassword");
     togglePassword("confirm-password", "toggleConfirmPassword");
+    
+//USERNAME CHECK
 
-    const passStrength = () =>{
-        //PASSWORD STRENGTH
-        const pass = document.querySelector('#password');
-        const alert = document.querySelector('.password-alert');
-        const form = document.querySelector('form');
-        
-        pass.addEventListener('input',()=>{
-            const password = pass.value;
-                if(password.length>8){
-                    if(/[!@#$%^&*()_+]/.test(password)){
-                        if(/[0-9]/.test(password)){
-                            if(/[A-Z]/.test(password)){
-                                alert.style.display = 'none';
-                                pass.style.borderBottom = '1px solid rgb(85, 82, 82)';
-                            }
-                            else{
-                                alert.textContent = "Password must contain an Uppercase alplphabet";
-                                alert.style.display = 'flex';
-                                pass.style.borderBottom = '1px solid red';
-                            }    
-                        }
-                        else{
-                            alert.textContent = "Password must contain a number";
-                            alert.style.display = 'flex';
-                            pass.style.borderBottom = '1px solid red';
-                        }
-                    }
-                    else{
-                        alert.textContent = "Password must contain a symbol i.e.(!@#$%^&*()_+)"
-                        alert.style.display = 'flex';
-                        pass.style.borderBottom = '1px solid red';
-                    }
-                }
-                else{
-                    alert.textContent = "Password length must be more than 8";
-                    alert.style.display = 'flex';
-                    pass.style.borderBottom = '1px solid red';
-                }
-                if(!pass.value){
-                    // let alert = document.querySelector('.cnfrm-pass-alert');
-                    alert.style.display = 'none';
-                    pass.style.borderBottom = '1px solid rgb(85, 82, 82)';
-                }
-        })
-        
-    }       
-    passStrength();
-
-
-    document.querySelector("#register-btn").disabled=true;
-
-    const submitForm = () =>{
-        const submitBtn = document.querySelector("#register-btn");
-        submitBtn.addEventListener('click',(event)=>{
-            event.preventDefault();
-            const form = document.querySelector('form');
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            console.log(email,password)
-            fetch('/signup', {
-                method: 'POST',
-                body: JSON.stringify({ name,email, password }),
-                headers: { 'Content-Type': 'application/json' }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (!data.success) {
-                    alert(data.message);
-                    location.reload();
-                    return;
-                }
-                form.reset();
-                window.location.replace('/')
-            });          
-        })
+const checkUsername = () =>{
+    const username = document.querySelector('#username');
+    if(!username.value){
+      alert('Username cannot be empty');
+      return false;
     }
-    // submitForm();
+    else {
+      if(username.value.length<4){
+          alert('Username Must Contain 4 Alphabets');
+          return false;
+      }
+      else{
+        return true;
+      }
+    }
+}
 
+//EMAIL CHECK
+const checkEmail = () =>{
+    const email = document.querySelector('#email');
+    if(!email.value){
+      alert('Email cannot be empty');
+    }
+    else{
+      if(email.checkValidity()){
+        console.log('okay report');
+        return true;
+      }
+      else{
+        alert('Enter a valid Email');
+        return false;
+      }
+    }
+}
 
-    const matchPasswords = () =>{
-        const pass = document.querySelector('#password');
-        const cnfrm_pass = document.querySelector('#confirm-password');
-        const alert = document.querySelector('.cnfrm-pass-alert');
-        const form = document.querySelector('form');
-    
-            form.addEventListener('submit',(event)=>{
-                if(cnfrm_pass.value !== pass.value){
-                    event.preventDefault();
-                    alert.textContent='Passwords dont match';
-                    alert.style.display = 'flex';
-                    cnfrm_pass.style.borderBottom = '1px solid red';
-                }        
-            })
-    
-            cnfrm_pass.addEventListener('input',()=>{
-                if(cnfrm_pass.value !== pass.value){
-                    // let alert = document.querySelector('.cnfrm-pass-alert');
-                    alert.textContent='Passwords dont match';
-                    alert.style.display = 'flex';
-                    cnfrm_pass.style.borderBottom = '1px solid red';
-                }
-                else{
-                    // let alert = document.querySelector('.cnfrm-pass-alert');
-                    alert.style.display = 'none';
-                    cnfrm_pass.style.borderBottom = '1px solid rgb(85, 82, 82)';
-                    document.querySelector("#register-btn").disabled=false;
+//Password Strength
+const passStrength = () =>{
+  //PASSWORD STRENGTH
+  const pass = document.querySelector('#password');
+  const password = pass.value.trim();
+  console.log('pass : ',password);
+        if(!password){
+          alert('Password cannot be empty')
+          return false;
+        } 
+          if(password.length>8){
+              if(/[!@#$%^&*()_+]/.test(password)){
+                  if(/[0-9]/.test(password)){
+                      if(/[A-Z]/.test(password)){
+                          return true;
+                      }
+                      else{
+                          const message = "Password must contain an Uppercase letter";
+                          alert(message);
+                          return false;
+                      }    
+                  }
+                  else{
+                      const message = "Password must contain a number";
+                      alert(message);
+                      return false;
+
+                  }
+              }
+              else{
+                  const message = "Password must contain a special character i.e.(!@#$%^&*()_+)"
+                  alert(message);
+                  return false;
+
+              }
+          }
+          else{
+              const message = "Password length must be more than 8";
+              alert(message);
+              return false;
+          }
+  
+}
+
+//MATCH PASSWORDS
+const matchPasswords = () =>{
+    const password = document.querySelector('#password');
+    const confirm_password = document.querySelector('#confirm-password');
+
+    if(password.value==confirm_password.value){
+      console.log('ok report');
+      return true;
+    }
+    else{
+      alert('Passwords do not match');
+      return false;
+    }
+
+}
+
+//SEND DATA
+const submitForm = () =>{
+    const username = document.querySelector('#username').value;
+    const email = document.querySelector('#email').value;
+    const password = document.querySelector('#password').value;
+      
+    fetch('/signup',{
+        method : 'POST',
+        body: JSON.stringify({ username, email, password }),
+        headers : {
+          'Content-Type' : 'application/json'
+        }
+    })
+    .then(data => data.json())
+    .then(data => {
+      if(!data.success){
+        alert(data.message);
+        return;
+      }
+      document.querySelector('form').reset();
+      window.location.replace('/');
+    //   console.log('SUCCESS');
+    })
+
+    // console.log(username,email,password);
+
+}
+
+//SUBMIT BUTTON
+const submit= document.querySelector('#register-btn')
+submit.addEventListener('click',(event)=>{
+    event.preventDefault();
+    if(checkUsername()){
+        if(checkEmail()){
+            if(passStrength()){
+                if(matchPasswords()){
                     submitForm();
-
                 }
-                if(!cnfrm_pass.value){
-                    // let alert = document.querySelector('.cnfrm-pass-alert');
-                    alert.style.display = 'none';
-                    cnfrm_pass.style.borderBottom = '1px solid rgb(85, 82, 82)';
-                }
-            })
+            }
+        }
     }
-    matchPasswords();
-    // submitForm();
+})
 
 
 });
